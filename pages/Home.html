@@ -22,10 +22,12 @@
         <div>
             <label for="Password">Password input type: </label>
             <input type="Password" id="pwd" name="pwd" required>
+            <error-output class="password-error" for="Password"></error-output>
         </div>
         <div>
             <label for="email">Email input type: </label>
             <input type="email" id="email" name="email" required>
+            <error-output class="email-error" for="email"></error-output>
         </div>
         <div>
             <label for="url">URL input type: </label>
@@ -38,6 +40,7 @@
         <div>
             <label for="tel"> Telephone input type: </label>
             <input type="tel" id="tel" name="telephone" required>
+            <error-output class="phone-error" for="tel"></error-output>
         </div>
         <div>
             <label for="search"> Search input type: </label>
@@ -66,6 +69,35 @@
                 textError.textContent = "";
             else textError.textContent = "Name is incorrect";
         });
+
+        const email = document.querySelector('#email');
+        const emailError = document.querySelector('.email-error');
+        email.addEventListener('input', function() {
+            let emailRegex = RegExp('^[a-z]+[-+._]?[a-z]+@[a-z]+[.][a-z]{2,}[.]?([a-z]{2,})?$');
+            if (emailRegex.test(email.value))
+                emailError.textContent = "";
+            else emailError.textContent = "Email is incorrect";
+        });
+
+
+        const phone = document.querySelector('#tel');
+        const phoneError = document.querySelector('.phone-error');
+        phone.addEventListener('input', function() {
+            let phoneRegex = RegExp('[91]{2}\\s[789]{1}[0-9]{9}$');
+            if (phoneRegex.test(phone.value))
+                phoneError.textContent = "";
+            else phoneError.textContent = "Phone is invalid";
+        });
+
+        const password = document.querySelector('#pwd');
+        const pwdError = document.querySelector('.password-error');
+        password.addEventListener('input', function() {
+            let pwdRegex = RegExp('^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9(($#@!%_&))]{8,}$');
+            if (pwdRegex.test(password.value))
+                pwdError.textContent = "";
+            else pwdError.textContent = "Password is invalid";
+        });
+
 
         const salary = document.querySelector('#salary');
         const output = document.querySelector('.salary-output');
